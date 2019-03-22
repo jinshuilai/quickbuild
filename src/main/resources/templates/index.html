@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>登陆成功</title>
+</head>
+<body>
+<h1 id="username"></h1>
+密码：<input type="text" id="pwd" /><br/>
+注册时间：<span id="addtime"></span><br/>
+
+<input type="button" value="更新" onclick="updPwd()"/><br/><br/>
+
+<a href="/logout">我要注销</a>
+
+<script src="../webjarslocator/jquery/jquery.js"></script>
+<script type="text/javascript">
+	$.get("/api/me",function(result){
+		var info = result.data;
+		$("#username").html(info.userName)
+		$("#pwd").val(info.password)
+		$("#addtime").html(info.addTime)
+	});
+
+	function updPwd(){
+		var age = $("#pwd").val();
+		$.post("/api/updPwd",{"password":age},function(result){
+			console.log(result);
+		   alert("更新成功");
+		});
+	}
+</script>
+</body>
+</html>

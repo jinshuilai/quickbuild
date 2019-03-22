@@ -1,7 +1,5 @@
 package com.lai.generator;
 
-import static com.lai.generator.Config.BASE_PACKAGE;
-
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -11,10 +9,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import org.apache.commons.lang3.StringUtils;
-
-import com.lai.base.HtmlParams;
-import com.lai.pojo.UserInfo;
+import com.lai.domain.UserAccount;
+import com.lai.framework.base.HtmlParams;
 
 import freemarker.template.TemplateExceptionHandler;
 
@@ -27,11 +23,11 @@ public class HtmlGenerator {
 
 	public static void main(String[] args) {
 		
-		genHtml(UserInfo.class);
+		genHtml(UserAccount.class);
 		
 	}
 
-	private static void genHtml(Class<UserInfo> clazz) {
+	private static void genHtml(Class<?> clazz) {
 		String model = clazz.getSimpleName();
 		model = model.substring(0, 1).toLowerCase() + model.substring(1);
 		List<Items> search = new ArrayList<>();
@@ -92,7 +88,7 @@ public class HtmlGenerator {
             data.put("details", detail);
             
 
-            File file = new File(PROJECT_PATH + RESOURCE_PATH + model + "_detail.html");
+            File file = new File(PROJECT_PATH + RESOURCE_PATH + model + "/" + model + "_detail.html");
             if (!file.getParentFile().exists()) {
                 file.getParentFile().mkdirs();
             }
@@ -114,7 +110,7 @@ public class HtmlGenerator {
             data.put("inputs", input);
             
 
-            File file = new File(PROJECT_PATH + RESOURCE_PATH + model + "_input.html");
+            File file = new File(PROJECT_PATH + RESOURCE_PATH + model + "/" + model + "_input.html");
             if (!file.getParentFile().exists()) {
                 file.getParentFile().mkdirs();
             }
@@ -136,7 +132,7 @@ public class HtmlGenerator {
             data.put("searchs", search);
             data.put("lists", list);
 
-            File file = new File(PROJECT_PATH + RESOURCE_PATH + model + "_list.html");
+            File file = new File(PROJECT_PATH + RESOURCE_PATH + model + "/" + model + "_list.html");
             if (!file.getParentFile().exists()) {
                 file.getParentFile().mkdirs();
             }

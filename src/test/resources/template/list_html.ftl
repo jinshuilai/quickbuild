@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   <title>管理后台</title>
-  <link rel="stylesheet" href="../webjarslocator/layui/css/layui.css">
+  <link rel="stylesheet" href="../../webjarslocator/layui/css/layui.css">
 </head>
 <body class="layui-layout-body">
 <div class="layui-layout layui-layout-admin">
@@ -114,8 +114,8 @@
     © layui.com - 底部固定区域
   </div>
 </div>
-<script src="../webjarslocator/jquery/jquery.js"></script>
-<script src="../webjarslocator/layui/layui.js"></script>
+<script src="../../webjarslocator/jquery/jquery.js"></script>
+<script src="../../webjarslocator/layui/layui.js"></script>
 <script>
 layui.use(['element', 'form', 'table', 'layer','laydate'], function(){
   var element = layui.element
@@ -127,7 +127,7 @@ layui.use(['element', 'form', 'table', 'layer','laydate'], function(){
   table.render({
     elem: '#${model}_table'
     ,height: 430
-    ,url: '/${model}/list' //数据接口
+    ,url: '../../api/${model}/list' //数据接口
     ,method: 'post'
     ,request: {
     	pageName: 'start'
@@ -194,7 +194,7 @@ layui.use(['element', 'form', 'table', 'layer','laydate'], function(){
 	  layer.open({
 		  title: '添加操作'
 		  ,type: 2
-		  ,content: '/pages/${model}_input.html'
+		  ,content: '${model}_input.html'
 		  ,area: ['600px', '400px']
 	  	  ,end: function(){
 	  		table.reload('${model}_table');
@@ -213,7 +213,7 @@ layui.use(['element', 'form', 'table', 'layer','laydate'], function(){
 	  layer.open({
 		  title: '更新操作'
 		  ,type: 2
-		  ,content: '/pages/${model}_input.html?id='+id
+		  ,content: '${model}_input.html?id='+id
 		  ,area: ['600px', '400px']
 	  	  ,end: function(){
 	  		table.reload('${model}_table');
@@ -234,7 +234,7 @@ layui.use(['element', 'form', 'table', 'layer','laydate'], function(){
       ids = ids.substring(0,ids.length-1)
 	  layer.confirm('确定删除吗？', function(index) {
          
-		  $.post('/${model}/deletes', "ids="+ids, function(info){
+		  $.post('../../api/${model}/deletes', "ids="+ids, function(info){
 			 if(info.code == 200){
 		         table.reload('${model}_table');
 		         layer.msg('已删除');
@@ -256,7 +256,7 @@ layui.use(['element', 'form', 'table', 'layer','laydate'], function(){
 	  layer.open({
 		  title: '查看详情'
 		  ,type: 2
-		  ,content: '/pages/${model}_detail.html?id='+id
+		  ,content: '${model}_detail.html?id='+id
 		  ,area: ['600px', '400px']
 	  });
   });

@@ -1,4 +1,4 @@
-package ${basePackage}.web;
+package ${basePackage}.controller;
 
 import java.util.Date;
 
@@ -10,13 +10,13 @@ import org.springframework.web.bind.annotation.RestController;
 
 import ${basePackage}.pojo.${modelNameUpperCamel};
 import ${basePackage}.service.${modelNameUpperCamel}Service;
-import com.lai.vo.Result;
-import com.lai.vo.ResultGenerator;
+import com.lai.framework.vo.Result;
+import com.lai.framework.vo.ResultGenerator;
 /**
 * Created by ${author} on ${date}.
 */
 @RestController
-@RequestMapping("/${modelNameLowerCamel}")
+@RequestMapping("/api/${modelNameLowerCamel}")
 public class ${modelNameUpperCamel}Controller {
     
     @Autowired
@@ -26,21 +26,21 @@ public class ${modelNameUpperCamel}Controller {
 	public Result save(${modelNameUpperCamel} ${modelNameLowerCamel}){
 	
 		${modelNameLowerCamel}Service.save(${modelNameLowerCamel});
-		return ResultGenerator.genSuccessResult();
+		return ResultGenerator.success();
 	}
 	
 	@RequestMapping("/deletes")
 	public Result delete(String ids){
 		
 		${modelNameLowerCamel}Service.deletes(ids);
-		return ResultGenerator.genSuccessResult();
+		return ResultGenerator.success();
 	}
 	
 	@RequestMapping("/find")
 	public Result find(Integer id){
 		
 		${modelNameUpperCamel} ${modelNameLowerCamel} = ${modelNameLowerCamel}Service.find(id);
-		return ResultGenerator.genSuccessResult(${modelNameLowerCamel});
+		return ResultGenerator.success(${modelNameLowerCamel});
 	}
 	
 	@RequestMapping("/list")
@@ -48,6 +48,6 @@ public class ${modelNameUpperCamel}Controller {
 			@RequestParam(defaultValue = "20") Integer size,${modelNameUpperCamel} ${modelNameLowerCamel}) throws Exception{
 		if(start != 0) start--;
 		Page<${modelNameUpperCamel}> list = ${modelNameLowerCamel}Service.findByPage(start,size,${modelNameLowerCamel});
-		return ResultGenerator.genSuccessResult(list);
+		return ResultGenerator.success(list);
 	}
 }

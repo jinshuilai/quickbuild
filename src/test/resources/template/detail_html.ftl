@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   <title>管理后台</title>
-  <link rel="stylesheet" href="../webjarslocator/layui/css/layui.css">
+  <link rel="stylesheet" href="../../webjarslocator/layui/css/layui.css">
 </head>
 <body>
 <div style="width:80%;margin-top:10px">
@@ -20,12 +20,12 @@
 </#list>  
 </form>
 </div>
-<script src="../webjarslocator/jquery/jquery.js"></script>
-<script src="../webjarslocator/layui/layui.js"></script>
+<script src="../../webjarslocator/jquery/jquery.js"></script>
+<script src="../../webjarslocator/layui/layui.js"></script>
 <script>
 var id = getQueryString('id');
 if(id){
-	$.post('/${model}/find', "id="+id, function(info){
+	$.post('../../api/${model}/find', "id="+id, function(info){
 		if(info.code == 200){
 			var model = info.data;
 			//console.log(model)

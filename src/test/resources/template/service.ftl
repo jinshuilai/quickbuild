@@ -1,6 +1,6 @@
 package ${basePackage}.service;
 import ${basePackage}.pojo.${modelNameUpperCamel};
-import com.lai.base.BaseService;
+import com.lai.framework.base.BaseService;
 
 
 /**

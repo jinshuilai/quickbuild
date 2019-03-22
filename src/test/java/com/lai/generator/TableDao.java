@@ -14,7 +14,7 @@ public class TableDao {
 	
 	public List<Columns> getColumnsByTable(String tableName) throws Exception{
 		String sql = "select COLUMN_NAME name,DATA_TYPE type from information_schema.columns "+""
-				+ "where table_name= ? and TABLE_SCHEMA = 'test'";
+				+ "where table_name= ? and TABLE_SCHEMA = '"+Config.DATABASE_NAME+"'";
 		List<Columns> result = db.findMoreRefResult(sql, Arrays.asList(new Object[]{tableName}), Columns.class);
 		for (Columns columns : result) {
 			columns.setFiled(CodeGenerator.tableNameConvertLowerCamel(columns.getName()));
@@ -34,7 +34,7 @@ public class TableDao {
 	
 	public static void main(String[] args) throws Exception {
 		TableDao dao = new TableDao();
-		List<Columns> list = dao.getColumnsByTable("user_info");
+		List<Columns> list = dao.getColumnsByTable("user_account");
 		System.out.println(list);
 	}
 }

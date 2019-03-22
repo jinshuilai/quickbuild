@@ -47,5 +47,19 @@ public class Columns {
 				+ javaType + "]";
 	}
 	
+	@Override
+	public int hashCode() {
+		return this.name.hashCode();
+	}
 	
+	@Override
+	public boolean equals(Object obj) {
+		if(obj instanceof Columns){
+			Columns o = (Columns) obj;
+			if(this.name.equals(o.getName())){
+				return true;
+			}
+		}
+		return false;
+	}
 }

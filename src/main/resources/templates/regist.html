@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>注册页面</title>
+</head>
+
+<body>
+
+<div class="container">
+
+    <form class="form-signin" id="form1" onsubmit="return false">
+        <h2 class="form-signin-heading">来吧客官 :)</h2>
+        <label for="inputEmail" class="sr-only">邮箱</label>
+        <input type="email" name="userName" class="form-control" placeholder="请输入注册邮箱" required autofocus>
+        <label class="sr-only">Password</label>
+        <input type="password" id="password1" name="password" class="form-control" placeholder="请输入密码" required/>
+        <label class="sr-only">Password2</label>
+        <input type="password" id="password2" class="form-control" placeholder="请再输入密码" required/>
+        <label class="sr-only">验证码</label>
+        <input type="text" name="verify" class="form-control" placeholder="请输入验证码" required/>
+        <img id="loginCap" alt="换一张" src="/regCode" onclick="changeImg()"> 
+        <button class="btn btn-lg btn-primary btn-block" type="button" onclick="toRegist()">注册</button>
+    </form>
+</div>
+
+<script src="../webjarslocator/jquery/jquery.js"></script>
+<script>
+function changeImg(){
+	var imgPath = "/regCode?date="+new Date();
+	$("#loginCap").attr("src",imgPath);
+}
+
+function toRegist(){
+	var p1 = $("#password1").val();
+	var p2 = $("#password2").val();
+	if(p1 != p2){
+		alert("两次密码不一致");
+		return false;
+	}
+	var data = $("#form1").serialize();
+	$.post('/regist', data, function(info){
+		if(info.code == 200){
+			alert("注册成功")
+			window.location.href = "/pages/login.html";
+		}else{
+			alert(info.message);
+			changeImg()
+		} 
+	 });
+}
+</script>
+</body>
+</html>

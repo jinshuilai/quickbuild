@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   <title>管理后台</title>
-  <link rel="stylesheet" href="../webjarslocator/layui/css/layui.css">
+  <link rel="stylesheet" href="../../webjarslocator/layui/css/layui.css">
 </head>
 <body>
 <div style="width:80%;margin-top:10px">
@@ -27,15 +27,15 @@
   </div>
 </form>
 </div>
-<script src="../webjarslocator/jquery/jquery.js"></script>
-<script src="../webjarslocator/layui/layui.js"></script>
+<script src="../../webjarslocator/jquery/jquery.js"></script>
+<script src="../../webjarslocator/layui/layui.js"></script>
 <script>
 layui.use('form', function(){
 	  var form = layui.form;
 	  
 	  //监听提交
 	  form.on('submit(${model}_submit)', function(data){
-		  $.post('/${model}/save', data.field, function(info){
+		  $.post('../../api/${model}/save', data.field, function(info){
 				if(info.code == 200){
 					layer.msg("保存成功");
 	    			close();
@@ -50,7 +50,7 @@ layui.use('form', function(){
 
 var id = getQueryString('id');
 if(id){
-	$.post('/${model}/find', "id="+id, function(info){
+	$.post('../../api/${model}/find', "id="+id, function(info){
 		if(info.code == 200){
 			var model = info.data;
 			$('input[name="seqid"]').val(model.seqid);

@@ -31,7 +31,7 @@ public class CodeGenerator {
 
     private static final String JAVA_PATH = "/src/main/java"; //java文件路径
 
-    private static final String PACKAGE_PATH_POJO = packageConvertPath(MODEL_PACKAGE);//生成的POJO存放路径
+    private static final String PACKAGE_PATH_MODEL = packageConvertPath(MODEL_PACKAGE);//生成的model存放路径
     private static final String PACKAGE_PATH_REPOSITORY = packageConvertPath(DAO_PACKAGE);//生成的repository存放路径
     private static final String PACKAGE_PATH_SERVICE = packageConvertPath(SERVICE_PACKAGE);//生成的Service存放路径
     private static final String PACKAGE_PATH_SERVICE_IMPL = packageConvertPath(SERVICE_IMPL_PACKAGE);//生成的Service实现存放路径
@@ -41,10 +41,10 @@ public class CodeGenerator {
     private static final String DATE = new SimpleDateFormat("yyyy/MM/dd").format(new Date());//@date
     private static final TableDao dao = new TableDao();
     //这里修改你使用的模板，依次为controller，service，service-impl
-    private static final String[] FTLS = {"controller.ftl","service.ftl","service-impl.ftl","repository.ftl","pojo.ftl"};
+    private static final String[] FTLS = {"controller.ftl","service.ftl","service-impl.ftl","repository.ftl","domain.ftl"};
 
     public static void main(String[] args) {
-        genCode("user_info");
+        genCode("user_account");
         //genCodeByCustomModelName("输入表名","输入自定义Model名称");
     }
 
@@ -76,6 +76,9 @@ public class CodeGenerator {
     private static void genModel(String tableName, String modelName) {
 		try {
 			List<Columns> list = dao.getColumnsByTable(tableName);
+			Columns s = new Columns();
+			s.setName("SEQID");
+			list.remove(s);
 			
 			freemarker.template.Configuration cfg = getConfiguration();
 
@@ -87,8 +90,9 @@ public class CodeGenerator {
             data.put("modelNameUpperCamel", modelNameUpperCamel);
             data.put("modelNameLowerCamel", tableNameConvertLowerCamel(tableName));
             data.put("basePackage", BASE_PACKAGE);
+            data.put("tableName", tableName);
 
-            File file = new File(PROJECT_PATH + JAVA_PATH + PACKAGE_PATH_POJO + modelNameUpperCamel + ".java");
+            File file = new File(PROJECT_PATH + JAVA_PATH + PACKAGE_PATH_MODEL + modelNameUpperCamel + ".java");
             if (!file.getParentFile().exists()) {
                 file.getParentFile().mkdirs();
             }

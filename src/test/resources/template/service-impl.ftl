@@ -19,7 +19,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 
-import com.lai.base.BaseServiceImpl;
+import com.lai.framework.base.BaseServiceImpl;
 import ${basePackage}.repository.${modelNameUpperCamel}Repository;
 import ${basePackage}.pojo.${modelNameUpperCamel};
 import ${basePackage}.service.${modelNameUpperCamel}Service;
@@ -40,7 +40,7 @@ public class ${modelNameUpperCamel}ServiceImpl extends BaseServiceImpl<${modelNa
 	public Page<${modelNameUpperCamel}> findByPage(Integer start,Integer size, ${modelNameUpperCamel} pojo) {
 		//order by
 		Sort sort = new Sort(Direction.DESC,"seqid");
-		PageRequest page = new PageRequest(start, size,sort);
+		PageRequest page = PageRequest.of(start, size,sort);
 		
 		 Specification<${modelNameUpperCamel}> specification = (Root<${modelNameUpperCamel}> root,
 		                CriteriaQuery<?> query, CriteriaBuilder cb)-> {
